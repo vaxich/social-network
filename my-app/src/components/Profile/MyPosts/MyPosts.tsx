@@ -9,7 +9,7 @@ const MyPosts = () => {
                 My posts
             </div>
             <div>
-                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <textarea name="" id="" ></textarea>
                 <button>Add post</button>
             </div>
             <div>

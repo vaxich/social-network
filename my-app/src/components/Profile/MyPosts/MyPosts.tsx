@@ -1,13 +1,15 @@
 import React from "react";
+import { postType } from "../../..";
 import style from "./MyPosts.module.css";
 import Post from "./Post/Posts";
 
-const MyPosts = () => {
-    let postsData = [
-        {id:1, message:"hello",likesCount:12},
-        {id:2, message:"how are you", likesCount:3}
-        
-    ]
+type MyPostsPropsType = {
+    posts:  Array<postType>
+}
+
+const MyPosts = (props: MyPostsPropsType) => {
+
+let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>);
 
     return (
         <div>
@@ -23,8 +25,7 @@ const MyPosts = () => {
                 </div>
             </div>
             <div className={style.description__block}>
-                <Post message={postsData[0].message} likesCount={postsData[0].likesCount}/>
-                <Post message={postsData[1].message} likesCount={postsData[1].likesCount} />
+                {postsElements}
             </div>
         </div>
 

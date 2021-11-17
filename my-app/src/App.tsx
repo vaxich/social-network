@@ -9,6 +9,7 @@ import { stateType } from './components/Redux/state';
 
 type AppPropsType = {
   appState: stateType
+  addPost:any
 }
 
 
@@ -23,7 +24,7 @@ const App = (props:AppPropsType) => {
       
       <div className="app__wrapper-content">
         <Route path="/dialogs" render={ ()=> <Dialogs dialogs={props.appState.dialogsPage.dialogs}  messages={props.appState.dialogsPage.messages}/>} />
-        <Route path="/profile"  render={ ()=> <Profile posts = {props.appState.profilePage.posts}/>} />
+        <Route path="/profile"  render={ ()=> <Profile posts = {props.appState.profilePage.posts} addPost={props.addPost}/>} />
         
       </div>
 

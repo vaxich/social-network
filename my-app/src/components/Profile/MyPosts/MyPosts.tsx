@@ -2,12 +2,15 @@ import React from "react";
 import { postType } from "./../../Redux/state";
 import style from "./MyPosts.module.css";
 import Post from "./Post/Posts";
+import {type} from "os";
 
 type newPostElementTypr = any
 
 type MyPostsPropsType = {
     posts:  Array<postType>
-    addPost:any
+    newPostText:string
+    dispatch:any
+
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -18,12 +21,18 @@ let newPostElement:any = React.createRef();
 
 let addPost =()=> {
     let text = newPostElement.current.value;
-    console.log(text);
-    
-    props.addPost(text);
-    newPostElement.current.value = "";
+     //props.addPost(text);
+    //props.updateNewPostText("")
+    props.dispatch({type: "ADD-POST"});
 }
 
+
+let onPostChange =() => {
+    let newText = newPostElement.current.value;
+    //props.updateNewPostText(text)
+    props.dispatch({type:"UPDATE-NEW-POST-TEXT", newText});
+
+    }
 
     return (
         <div>
@@ -32,7 +41,7 @@ let addPost =()=> {
             </div>
             <div>
                 <div>
-                    <textarea ref= {newPostElement} ></textarea>
+                    <textarea onChange={onPostChange} ref= {newPostElement} value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>

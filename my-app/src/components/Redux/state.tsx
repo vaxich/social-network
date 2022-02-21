@@ -65,22 +65,8 @@ let store:any = {
     subckribe (observer:any)  {
         this._state._callSubcriber = observer;
     },
-    addPost (postMessage:any) {
-        let newPost = {
-            id: 5,
-            message:this._state.profilePage.newPostText,
-            likesCount: 0
-        };
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText=""
-        this._state._callSubcriber(this._state);
-    },
-    updateNewPostText (newText:string) {
 
-
-        this._state.profilePage.newPostText = newText;
-        this._state._callSubcriber(this._state);
-    },
+    
     dispatch(action:any) {
         if(action.type === "ADD-POST") {
             let newPost = {

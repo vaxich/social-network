@@ -30,7 +30,8 @@ let addPost =()=> {
 let onPostChange =() => {
     let newText = newPostElement.current.value;
     //props.updateNewPostText(text)
-    props.dispatch({type:"UPDATE-NEW-POST-TEXT", newText});
+    let action = {type:"UPDATE-NEW-POST-TфEXT", newText};
+    props.dispatch(action);
 
     }
 

@@ -5,11 +5,11 @@ import Profile from './components/Profile/Profile';
 import React from 'react';
 import './App.css';
 import {BrowserRouter, Route,} from "react-router-dom";
-import {stateType} from './components/Redux/state';
+import store, {stateType} from './components/Redux/state';
 
 type AppPropsType = {
     appState: any
-
+    store:any
     dispatch:any
 }
 
@@ -24,8 +24,9 @@ const App = (props: AppPropsType) => {
                 <Navbar/>
 
                 <div className="app__wrapper-content">
-                    <Route path="/dialogs" render={() => <Dialogs dialogs={props.appState.dialogsPage.dialogs}
-                                                                  messages={props.appState.dialogsPage.messages}/>}/>
+                    <Route path="/dialogs" render={() => <Dialogs store={props.store}  />}
+
+                    />
                     <Route path="/profile"
                            render={() => <Profile profilePage={props.appState.profilePage}
                                                   dispatch={props.dispatch}/>}/>

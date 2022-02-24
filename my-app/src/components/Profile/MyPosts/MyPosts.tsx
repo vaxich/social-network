@@ -1,5 +1,5 @@
 import React from "react";
-import { postType } from "./../../Redux/state";
+import {addPostActionCreator, postType, updateNewPostTextActionCreator} from "./../../Redux/state";
 import style from "./MyPosts.module.css";
 import Post from "./Post/Posts";
 import {type} from "os";
@@ -7,31 +7,32 @@ import {type} from "os";
 type newPostElementTypr = any
 
 type MyPostsPropsType = {
-    posts:  Array<postType>
-    newPostText:string
-    dispatch:any
+    posts: Array<postType>
+    newPostText: string
+    dispatch: any
 
 }
+
 
 const MyPosts = (props: MyPostsPropsType) => {
 
-let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>);
+    let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>);
 
-let newPostElement:any = React.createRef();
+    let newPostElement: any = React.createRef();
 
-let addPost =()=> {
-    let text = newPostElement.current.value;
-     //props.addPost(text);
-    //props.updateNewPostText("")
-    props.dispatch({type: "ADD-POST"});
-}
+    let addPost = () => {
+        let text = newPostElement.current.value;
+        //props.addPost(text);
+        //props.updateNewPostText("")
+        props.dispatch(addPostActionCreator());
+    }
 
 
-let onPostChange =() => {
-    let newText = newPostElement.current.value;
-    //props.updateNewPostText(text)
-    let action = {type:"UPDATE-NEW-POST-TфEXT", newText};
-    props.dispatch(action);
+    let onPostChange = () => {
+        let text = newPostElement.current.value;
+        //props.updateNewPostText(text)
+        let action = updateNewPostTextActionCreator(text);
+        props.dispatch(action);
 
     }
 
@@ -42,7 +43,7 @@ let onPostChange =() => {
             </div>
             <div>
                 <div>
-                    <textarea onChange={onPostChange} ref= {newPostElement} value={props.newPostText}/>
+                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
@@ -52,7 +53,6 @@ let onPostChange =() => {
                 {postsElements}
             </div>
         </div>
-
 
 
     )

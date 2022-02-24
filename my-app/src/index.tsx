@@ -26,4 +26,4 @@ reportWebVitals();
 
 rerenderEntireTree(store.getState());
 
-store.subckribe(rerenderEntireTree)
+store.subscribe(rerenderEntireTree)

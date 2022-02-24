@@ -3,7 +3,8 @@ import style from "./Dialogs.module.css";
 import {NavLink} from 'react-router-dom';
 import Message, {MessagePropsType} from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
-import {dialogsType, messageType, sendMessageCreator, updateNewMessageCreator} from "../Redux/state";
+import {dialogsType, messageType} from "../Redux/state";
+import {sendMessageCreator, updateNewMessageCreator} from "../Redux/dialogs-reduser";
 
 
 type DialogsPropsType = {
@@ -19,8 +20,9 @@ const Dialogs = (props: DialogsPropsType) => {
     let dialogsElement = state.dialogs.map((dialog: dialogsType) => <DialogItem name={dialog.name} id={dialog.id}/>);
     let messageElements = state.messages.map((message: messageType) => <Message message={message.message}/>);
     let newMessageBody = state.newMessageBody;
-    const onSendMessageClick = () => {
-        props.store.dispatch(sendMessageCreator)
+    const onSendMessageClick = ( ) => {
+
+        props.store.dispatch(sendMessageCreator(newMessageBody))
     }
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.currentTarget.value

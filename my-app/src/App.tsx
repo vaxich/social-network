@@ -5,7 +5,8 @@ import Profile from './components/Profile/Profile';
 import React from 'react';
 import './App.css';
 import {BrowserRouter, Route,} from "react-router-dom";
-import store, {stateType} from './components/Redux/state';
+import store, {stateType} from './components/Redux/store';
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
     appState: any
@@ -14,7 +15,7 @@ type AppPropsType = {
 }
 
 
-const App = (props: AppPropsType) => {
+const App = () => {
 
 
     return (
@@ -24,12 +25,11 @@ const App = (props: AppPropsType) => {
                 <Navbar/>
 
                 <div className="app__wrapper-content">
-                    <Route path="/dialogs" render={() => <Dialogs store={props.store}  />}
+                    <Route path="/dialogs" render={() => <DialogsContainer   />}
 
                     />
                     <Route path="/profile"
-                           render={() => <Profile profilePage={props.appState.profilePage}
-                                                  dispatch={props.dispatch}/>}/>
+                           render={() => <Profile />}/>
 
                 </div>
 

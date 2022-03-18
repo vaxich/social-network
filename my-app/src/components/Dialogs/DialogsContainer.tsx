@@ -1,10 +1,9 @@
-import React, {ChangeEvent, ChangeEventHandler} from "react";
-import style from "./Dialogs.module.css";
-import {NavLink} from 'react-router-dom';
-import Message, {MessagePropsType} from "./Message/Message";
-import DialogItem from "./DialogItem/DialogItem";
-import {dialogsType, messageType} from "../Redux/store";
+import React, {ChangeEvent, ChangeEventHandler, ReactNode} from "react";
+
 import {sendMessageCreator, updateNewMessageCreator} from "../Redux/dialogs-reduser";
+import Dialogs from "./Dialogs";
+
+import { connect } from "react-redux";
 
 
 type DialogsPropsType = {
@@ -14,45 +13,20 @@ type DialogsPropsType = {
 }
 
 
-const Dialogs = (props: DialogsPropsType) => {
-    let state = props.store.getState().dialogsPage;
-
-    let dialogsElement = state.dialogs.map((dialog: dialogsType) => <DialogItem name={dialog.name} id={dialog.id}/>);
-    let messageElements = state.messages.map((message: messageType) => <Message message={message.message}/>);
-    let newMessageBody = state.newMessageBody;
-    const onSendMessageClick = ( ) => {
-
-        props.store.dispatch(sendMessageCreator(newMessageBody))
-    }
-    const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let body = e.currentTarget.value
-       props.store.dispatch(updateNewMessageCreator(body))
-        console.log(body)
-    }
-    return (
-        <div className={style.dialogs}>
-            <div className={style.dialogs__item}>
-                {dialogsElement}
 
 
-            </div>
-            <div className={style.messages}>
-                <div>{messageElements}</div>
-                <div>
-                    <div><textarea
-                        value={newMessageBody}
-                        onChange={onNewMessageChange}
-                        placeholder="введите Ваше сообщение">
-
-                    </textarea></div>
-                    <div>
-                        <button onClick={onSendMessageClick}>SEND</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    )
+let mapStateToProps =(state:any) => {
+    return {dialogsPage: state.dialogsPage}
 }
+let mapDispatchToProps =(dispatch:any) => {
+    return {
+        sendMessage: () => {dispatch(sendMessageCreator());
+        },
+        updateNewMessageBody: (body:any)=> {dispatch(updateNewMessageCreator(body))}
+    }
+        
+        
+    }
 
-export default Dialogs;
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+    export default DialogsContainer;

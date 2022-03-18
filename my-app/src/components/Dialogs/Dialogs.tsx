@@ -1,33 +1,37 @@
 import React, {ChangeEvent, ChangeEventHandler} from "react";
 import style from "./Dialogs.module.css";
-import {NavLink} from 'react-router-dom';
-import Message, {MessagePropsType} from "./Message/Message";
+
+import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
-import {dialogsType, messageType} from "../Redux/state";
-import {sendMessageCreator, updateNewMessageCreator} from "../Redux/dialogs-reduser";
+import {dialogsType, messageType} from "../Redux/store";
+
 
 
 type DialogsPropsType = {
 
-    store: any
+    sendMessage: any
+    updateNewMessageBody:any
+    dialogsPage:any
+
 
 }
 
 
 const Dialogs = (props: DialogsPropsType) => {
-    let state = props.store.getState().dialogsPage;
+    let state = props.dialogsPage;
 
-    let dialogsElement = state.dialogs.map((dialog: dialogsType) => <DialogItem name={dialog.name} id={dialog.id}/>);
-    let messageElements = state.messages.map((message: messageType) => <Message message={message.message}/>);
+    let dialogsElement = state.dialogs.map((dialog: dialogsType) => <DialogItem name={dialog.name} key={dialog.id} id={dialog.id}/>);
+    let messageElements = state.messages.map((message: messageType) => <Message message={message.message} key={message.id}/>);
     let newMessageBody = state.newMessageBody;
-    const onSendMessageClick = ( ) => {
 
-        props.store.dispatch(sendMessageCreator(newMessageBody))
+    const onSendMessageClick = (text:any ) => {
+
+        props.sendMessage();
     }
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.currentTarget.value
-       props.store.dispatch(updateNewMessageCreator(body))
-        console.log(body)
+       props.updateNewMessageBody(body)
+
     }
     return (
         <div className={style.dialogs}>

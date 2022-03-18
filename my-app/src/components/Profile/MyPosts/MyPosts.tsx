@@ -1,5 +1,5 @@
 import React from "react";
-import {postType} from "./../../Redux/state";
+import {postType} from "../../Redux/store";
 import style from "./MyPosts.module.css";
 import Post from "./Post/Posts";
 import {type} from "os";
@@ -10,7 +10,8 @@ type newPostElementTypr = any
 type MyPostsPropsType = {
     posts: Array<postType>
     newPostText: string
-    dispatch: any
+    updateNewPostText: any
+    addPost:any
 
 }
 
@@ -21,19 +22,18 @@ const MyPosts = (props: MyPostsPropsType) => {
 
     let newPostElement: any = React.createRef();
 
-    let addPost = () => {
+    let onAddPost = () => {
         let text = newPostElement.current.value;
-        //props.addPost(text);
-        //props.updateNewPostText("")
-        props.dispatch(addPostActionCreator());
+        props.addPost(text);
+        props.updateNewPostText("")
+
     }
 
 
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        //props.updateNewPostText(text)
-        let action = updateNewPostTextActionCreator(text);
-        props.dispatch(action);
+        props.updateNewPostText(text)
+
 
     }
 
@@ -47,7 +47,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                     <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
             <div className={style.description__block}>

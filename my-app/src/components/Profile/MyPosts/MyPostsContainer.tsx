@@ -1,62 +1,37 @@
+import { connect } from "react-redux";
 import React from "react";
-import {postType} from "../../Redux/store";
-import style from "./MyPosts.module.css";
-import Post from "./Post/Posts";
-import {type} from "os";
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../Redux/profile-reduser";
+import MyPosts from "./MyPosts";
 
-type newPostElementTypr = any
+
+type newPostElementType = any
 
 type MyPostsPropsType = {
-    posts: Array<postType>
-    newPostText: string
-    dispatch: any
+
+    store: any
 
 }
 
 
-const MyPosts = (props: MyPostsPropsType) => {
 
-    let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>);
-
-    let newPostElement: any = React.createRef();
-
-    let addPost = () => {
-        let text = newPostElement.current.value;
-        //props.addPost(text);
-        //props.updateNewPostText("")
-        props.dispatch(addPostActionCreator());
+const mapStateToProps =(state:any) => {
+    return {
+        posts: state.profilePage.posts,
+        newPostText: state.profilePage.newPostText
     }
-
-
-    let onPostChange = () => {
-        let text = newPostElement.current.value;
-        //props.updateNewPostText(text)
-        let action = updateNewPostTextActionCreator(text);
-        props.dispatch(action);
-
+}
+const mapDispatchToProps =(dispatch:any) => {
+    return {
+        updateNewPostText: (text:any) => {
+            let action = updateNewPostTextActionCreator(text);
+                    dispatch(action);
+        },
+        addPost: () => dispatch(addPostActionCreator())
     }
-
-    return (
-        <div>
-            <div>
-                <h3> My posts</h3>
-            </div>
-            <div>
-                <div>
-                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
-                </div>
-                <div>
-                    <button onClick={addPost}>Add post</button>
-                </div>
-            </div>
-            <div className={style.description__block}>
-                {postsElements}
-            </div>
-        </div>
-
-
-    )
 }
 
-export default MyPosts;
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
+
+export default MyPostsContainer;
+
+

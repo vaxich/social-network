@@ -2,8 +2,7 @@ import React from "react";
 import {postType} from "../../Redux/store";
 import style from "./MyPosts.module.css";
 import Post from "./Post/Posts";
-import {type} from "os";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../Redux/profile-reduser";
+
 
 type newPostElementTypr = any
 

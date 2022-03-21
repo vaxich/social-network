@@ -1,12 +1,13 @@
-import Dialogs from './components/Dialogs/Dialogs';
+
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import React from 'react';
 import './App.css';
 import {BrowserRouter, Route,} from "react-router-dom";
-import store, {stateType} from './components/Redux/store';
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from './components/Users/UsersContainer';
+
 
 type AppPropsType = {
     appState: any
@@ -25,11 +26,14 @@ const App = () => {
                 <Navbar/>
 
                 <div className="app__wrapper-content">
-                    <Route path="/dialogs" render={() => <DialogsContainer   />}
+                    <Route path="/dialogs" 
+                           render={() => <DialogsContainer   />}
 
                     />
                     <Route path="/profile"
                            render={() => <Profile />}/>
+                    <Route path="/users"
+                           render={() => <UsersContainer />}/>
 
                 </div>
 

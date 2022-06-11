@@ -10,6 +10,8 @@ const Navbar =()=> {
         </div>
         <div className={style.item}>
             <NavLink exact to="/dialogs" activeClassName={style.activeLink}>Message</NavLink>
+        </div><div className={style.item}>
+            <NavLink exact to="/users" activeClassName={style.activeLink}>Users</NavLink>
         </div>
         <div className={style.item}>
             <NavLink exact to="/News" activeClassName={style.activeLink}>News</NavLink>

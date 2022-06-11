@@ -4,20 +4,27 @@ const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
 
-export type InitialStateType = {
-    users: Array <{id: number,
-             photoUrl: string, 
-             followed: boolean, 
-             fullName: string, 
-             status: string, 
-             location: {city: string, country: string}}>}
 
-let initialState: InitialStateType  = {
-    users : [ 
-    ]
+
+let initialState = {
+    users : [] as UserType[]
 }
 
-export const usersReduser =(state = initialState, action:any):InitialStateType => {
+export type UserType = {
+    id: number,
+    photoUrl: {
+        small: null | string,
+        large: null | string
+    },
+    followed: boolean,
+    name: string,
+    status: string,
+    // location: {city: string, country: string}
+}
+
+export type InitialStateType = typeof initialState
+
+export const usersReduser =(state: InitialStateType = initialState, action:any):InitialStateType => {
     switch (action.type) {
         case FOLLOW :
             return {

@@ -3,6 +3,7 @@ import {dialogsReduser} from "./dialogs-reduser";
 import {profileReduser} from "./profile-reduser";
 import {sidebarReduser} from "./sidebar-reduser";
 import { usersReduser } from "./usersReduser";
+import {authReduser} from "./auth-Reduser";
 
 declare global {
     interface Window {
@@ -15,6 +16,7 @@ let redusers = combineReducers({
     dialogsPage: dialogsReduser,
     sidebar: sidebarReduser,
     usersPage:usersReduser,
+    auth: authReduser
 });
 let store = createStore(redusers);
 

@@ -4,5 +4,17 @@
 }
 
 .header img {
-    width: 88px;
+    width: 68px;
+}
+.header_foto {
+    width: 68px;
+}
+.login_block {
+    float: right;
+    color: white;
+}
+
+.login_block {
+    color: black;
+    margin-right: 20px;
 }

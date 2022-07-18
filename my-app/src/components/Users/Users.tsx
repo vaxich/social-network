@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./users.module.css";
-import {toggleFollowingPropgress, UserType} from "../Redux/usersReduser";
+import { UserType} from "../Redux/usersReduser";
 import userPhoto from "../../assets/images/avatar.png";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
@@ -55,7 +55,7 @@ const Users = (props: any) => {
 
                             }}>Unfollow</button>
 
-                            : <button disabled={props.followingInProgress.some( id =>  id === u.id)} onClick={() => {
+                            : <button disabled={props.followingInProgress.some( id  =>  id === u.id)} onClick={() => {
                                 props.toggleFollowingPropgress(true, u.id)
                                 axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}` , {}, {
                                     withCredentials:true,

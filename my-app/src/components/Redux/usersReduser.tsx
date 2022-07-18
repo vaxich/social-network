@@ -31,7 +31,14 @@ export type UserType = {
     // location: {city: string, country: string}
 }
 
-export type InitialStateType = typeof initialState
+export type InitialStateType = {
+    users :   UserType[],
+    pageSize: number,
+    totalUsersCount: number,
+    currentPage: number,
+    isFetching: boolean,
+    followingInProgress: number[]
+}
 
 export const usersReduser =(state: InitialStateType = initialState, action:any):InitialStateType => {
     switch (action.type) {

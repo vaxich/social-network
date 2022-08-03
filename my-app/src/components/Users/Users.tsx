@@ -6,8 +6,19 @@ import {NavLink} from "react-router-dom";
 import axios from "axios";
 import {usersAPI} from "../../api/api";
 
+type UsersPropsType ={
+    users: UserType[],
+    pageSize: number,
+    totalUsersCount: number,
+    currentPage: number,
+    onPageChanged : (pageNumber:number) => void
+    follow: (userId: number) => void,
+    unfollow: (userId: number) => void ,
+    followingInProgress: number[]
+}
 
-const Users = (props: any) => {
+
+const Users = (props: UsersPropsType) => {
 
     let pagesCount = Math.ceil( props.totalUsersCount / props.pageSize);
     let pages = [];

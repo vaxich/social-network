@@ -1,10 +1,9 @@
-import React, {ChangeEvent, ChangeEventHandler} from "react";
+import React, {ChangeEvent} from "react";
 import style from "./Dialogs.module.css";
-
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 import {dialogsType, messageType} from "../Redux/store";
-
+import Redirect from "react-router-dom"
 
 
 type DialogsPropsType = {
@@ -12,7 +11,7 @@ type DialogsPropsType = {
     sendMessage: any
     updateNewMessageBody:any
     dialogsPage:any
-
+    isAuth: boolean
 
 }
 
@@ -23,6 +22,8 @@ const Dialogs = (props: DialogsPropsType) => {
     let dialogsElement = state.dialogs.map((dialog: dialogsType) => <DialogItem name={dialog.name} key={dialog.id} id={dialog.id}/>);
     let messageElements = state.messages.map((message: messageType) => <Message message={message.message} key={message.id}/>);
     let newMessageBody = state.newMessageBody;
+
+    //if (!props.isAuth) return <Redirect to={"/login"} />;
 
     const onSendMessageClick = (text:any ) => {
 

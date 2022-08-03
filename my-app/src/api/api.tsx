@@ -18,14 +18,25 @@ export const usersAPI = {
             })
 
     },
-    follow(userId: string) {
-        return  instans.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`
+    follow(userId: number) {
+        return  instans.post(`follow/${userId}`
         )
     },
-    unfollow(userId: string) {
-        return  instans.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
+    unfollow(userId: number) {
+        return  instans.delete(`follow/${userId}`)
 
+    },
+    getProfile(userId:string) {
+        return instans.get("profile" + userId)
     }
+
+}
+
+export const authAPI = {
+    me () {
+        return instans.get(`auth/me`  )
+    }
+
 }
 
 // export const getUsers = (currentPage = 1, pageSize = 10) => {

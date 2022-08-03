@@ -16,7 +16,9 @@ type DialogsPropsType = {
 
 
 let mapStateToProps =(state:any) => {
-    return {dialogsPage: state.dialogsPage}
+    return {dialogsPage: state.dialogsPage,
+            isAuth: state.auth.isAuth
+    }
 }
 let mapDispatchToProps =(dispatch:any) => {
     return {

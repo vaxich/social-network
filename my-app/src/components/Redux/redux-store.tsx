@@ -21,6 +21,8 @@ let redusers = combineReducers({
 });
 let store = createStore(redusers, applyMiddleware(thunkMiddleware));
 
+export type AppStateType = ReturnType<typeof redusers>
+
 window.store = store;
 
 

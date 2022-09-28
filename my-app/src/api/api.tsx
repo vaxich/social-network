@@ -27,7 +27,22 @@ export const usersAPI = {
 
     },
     getProfile(userId:string) {
-        return instans.get("profile" + userId)
+        console.warn('старый метод. испоьльзуйте profileAPI')
+        return profileAPI.getProfile(userId)
+    }
+
+}
+
+export const profileAPI = {
+
+    getProfile(userId:string) {
+        return instans.get("profile/" + userId)
+    },
+    getStatus(userId:string) {
+        return instans.get("profile/status/" + userId)
+    },
+    updateStatus(status:string){
+        return instans.put("profile/status/", {status})
     }
 
 }
@@ -38,19 +53,3 @@ export const authAPI = {
     }
 
 }
-
-// export const getUsers = (currentPage = 1, pageSize = 10) => {
-//     return instans.get(`users?page=${currentPage}&count=${pageSize}`)
-//         .then(response => {
-//             return response.data;
-//         })
-//
-// }
-//
-// export const getUsers2 = (currentPage = 1, pageSize = 10) => {
-//     return instans.get(`follow?page=${currentPage}&count=${pageSize}`)
-//         .then(response => {
-//             return response.data;
-//         })
-//
-// }

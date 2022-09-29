@@ -4,9 +4,10 @@ import style from "./ProfileInfo.module.css";
 
 type PropsProfileStatusType = {
     status: string
+    updateStatus: (status:string)=>void
 }
 
-class ProfileStatus extends React.Component  {
+class ProfileStatus extends React.Component <PropsProfileStatusType> {
 
     state = {
         editMode: false,
@@ -33,6 +34,14 @@ class ProfileStatus extends React.Component  {
 
         )
 
+    }
+
+    componentDidUpdate(prevProps: Readonly<{status:string}>, prevState: Readonly<{}>, snapshot?: any): void {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
     }
 
 

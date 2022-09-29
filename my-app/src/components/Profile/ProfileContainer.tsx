@@ -42,7 +42,7 @@ let mapStateToProps = (state:any) => ({
     }
 )
 
-export default compose(
+export default compose<React.ComponentType>(
     connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
     withRouter
 

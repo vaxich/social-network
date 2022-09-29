@@ -103,7 +103,7 @@ type UsersContainerPropsType = MapStatePropsType & MapDispatchPropsType
 
 
 
-export default compose(
+export default compose<React.ComponentType>(
     withAuthRedirect,
     connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps,
         { follow, unfollow,
